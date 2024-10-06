@@ -21,7 +21,7 @@ Dalam era digital, industri telekomunikasi menghadapi tantangan yang signifikan 
 - Menganalisis fitur yang berperan penting dalam keputusan churn pelanggan.
 
 ### Solution statements
-- Menggunakan Random Forest dan Gradient Boosting untuk membangun model klasifikasi.
+- Menggunakan LightGBM, Random Forest, XGBoost, dan SVM untuk membangun model klasifikasi.
 - Melakukan hyperparameter tuning untuk meningkatkan performa model, mengoptimalkan metrik evaluasi seperti accuracy, recall, dan precision.
 
 ## Data Understanding
@@ -35,9 +35,30 @@ Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencaku
 ## Exploratory Data Analysis
 Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
 
-- Distribusi customer berdasarkan gender:
+- Distribution of Gender Type
+
 ![image](https://github.com/user-attachments/assets/0453d495-0a76-4e02-9f03-7ff63c5daef0)
+
 Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapat dilihat pada grafik di atas, kategori gender tidak berbeda jauh satu sama lain.
+
+- Payment Method Distribution
+
+![image](https://github.com/user-attachments/assets/206bd770-0e69-4381-b056-c5038b8e28f4)
+
+
+
+- Churn Category by Gender
+
+![image](https://github.com/user-attachments/assets/6a16e62d-252a-48ef-9aa4-c107784ecf78)
+
+- Internet Service vs Churn Category
+
+![image](https://github.com/user-attachments/assets/d1067fa2-9816-4113-9f91-133fd81ff6c5)
+
+- Distribution of Internet Type
+
+![image](https://github.com/user-attachments/assets/ec40568b-9679-4ab1-9976-0225ed9a6938)
+
 
 ## Data Preparation
 - Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani.
@@ -69,10 +90,10 @@ Metrik yang digunakan untuk mengevaluasi model adalah Akurasi, Precision, Recall
 ## Hasil Proyek
 Setelah melakukan tuning, model LightGBM memberikan hasil terbaik dengan metrik sebagai berikut:
 
-Akurasi: 95%
-Precision: 91%
-Recall: 92%
-F1-Score: 91%
+- Akurasi: 95%
+- Precision: 91%
+- Recall: 92%
+- F1-Score: 91%
 
 Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan XGBoost.
 
