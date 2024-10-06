@@ -1,87 +1,79 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Halim Sajidi
 
 ## Domain Proyek
 
-Pada bagian ini, kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Dalam era digital, industri telekomunikasi menghadapi tantangan yang signifikan terkait customer churn (pengurangan pelanggan). Customer churn dapat mengakibatkan kerugian besar, karena lebih mahal untuk mendapatkan pelanggan baru daripada mempertahankan yang sudah ada. Oleh karena itu, perusahaan telekomunikasi perlu mengidentifikasi pelanggan yang cenderung untuk churn sehingga mereka dapat menerapkan strategi pencegahan.
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
-- Menyertakan hasil riset terkait atau referensi. Referensi yang diberikan harus berasal dari sumber yang kredibel dan author yang jelas.
-  
+**Mengapa masalah ini penting?**:
+- Churn mengurangi pendapatan perusahaan.
+- Mengidentifikasi pelanggan yang berpotensi churn dapat mengarahkan perusahaan untuk menawarkan layanan yang lebih sesuai, meningkatkan loyalitas pelanggan.
+
+  Riset menunjukkan bahwa 67% pelanggan yang churn menganggap layanan yang mereka terima tidak memenuhi harapan mereka, dan perusahaan yang tidak memiliki upaya pencegahan churn yang memadai dapat kehilangan hingga 25-30% basis pelanggannya per tahun.
   Format Referensi: [Judul Referensi](https://scholar.google.com/) 
 
 ## Business Understanding
-
-Pada bagian ini, kamu perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
-
-Menjelaskan pernyataan masalah latar belakang:
-- Pernyataan Masalah 1
-- Pernyataan Masalah 2
-- Pernyataan Masalah n
+- Bagaimana kita bisa mengidentifikasi pelanggan yang akan churn berdasarkan pola penggunaan layanan mereka?
+- Fitur-fitur apa saja yang paling memengaruhi keputusan pelanggan untuk churn?
 
 ### Goals
+- Mengembangkan model machine learning yang dapat memprediksi pelanggan yang berpotensi churn.
+- Menganalisis fitur yang berperan penting dalam keputusan churn pelanggan.
 
-Menjelaskan tujuan dari pernyataan masalah:
-- Jawaban pernyataan masalah 1
-- Jawaban pernyataan masalah 2
-- Jawaban pernyataan masalah n
-
-Semua poin di atas harus diuraikan dengan jelas. Anda bebas menuliskan berapa pernyataan masalah dan juga goals yang diinginkan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Menambahkan bagian “Solution Statement” yang menguraikan cara untuk meraih goals. Bagian ini dibuat dengan ketentuan sebagai berikut: 
-
-    ### Solution statements
-    - Mengajukan 2 atau lebih solution statement. Misalnya, menggunakan dua atau lebih algoritma untuk mencapai solusi yang diinginkan atau melakukan improvement pada baseline model dengan hyperparameter tuning.
-    - Solusi yang diberikan harus dapat terukur dengan metrik evaluasi.
+### Solution statements
+- Menggunakan Random Forest dan Gradient Boosting untuk membangun model klasifikasi.
+- Melakukan hyperparameter tuning untuk meningkatkan performa model, mengoptimalkan metrik evaluasi seperti accuracy, recall, dan precision.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
-
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
+Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencakup data pelanggan dari perusahaan telekomunikasi di California, dengan 7.043 entri dan 38 kolom. Dataset dapat di akses melalui link https://www.kaggle.com/datasets/shilongzhuang/telecom-customer-churn-by-maven-analytics/data 
 
 ### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
 - accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
 - cuisine : merupakan jenis masakan yang disajikan pada restoran.
 - dst
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+## Exploratory Data Analysis
+Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
+![Uploading image.png…]()
+
+- Distribusi customer berdasarkan gender: Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapat dilihat pada grafik di atas, kategori gender tidak berbeda jauh satu sama lain.
 
 ## Data Preparation
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
+- Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani.
+- Encoding: Kolom kategorikal seperti "Gender" dan "Contract" diubah menjadi bentuk numerik menggunakan LabelEncoder.
+- Splitting Data: Membagi data ke dalam dua bagian utama Training Data dan Test Data dengan proporsi 80% dan 20% yang dilakukan dengan menggunakan fungsi train_test_split dari library Scikit-Learn.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
+Alasan langkah-langkah ini dilakukan adalah untuk memastikan data yang bersih dan siap digunakan dalam pemodelan, sehingga dapat menghindari bias dan meningkatkan akurasi model.
 
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Pada tahap ini, empat algoritma utama yang digunakan adalah LightGBM (LGBM), Random Forest, XGBoost, dan SVM (Support Vector Machine). Berikut penjelasan tiap algoritma:
+- LightGBM (LGBM): Algoritma yang efisien dan cepat dalam menangani dataset besar, dengan kemampuan menangani fitur numerik dan kategorikal serta mengurangi waktu komputasi. Cocok untuk data yang memiliki ketidakseimbangan kelas.
+- Random Forest: Algoritma berbasis ensemble yang terdiri dari banyak decision trees, cocok untuk data yang bervariasi dan dapat menangani data dengan banyak fitur. Salah satu kelebihannya adalah feature importance, yang membantu mengidentifikasi fitur yang paling berpengaruh terhadap churn.
+- XGBoost: Algoritma boosting berbasis decision tree yang terkenal dengan kemampuannya dalam meningkatkan akurasi prediksi. XGBoost memiliki kemampuan untuk mengatasi overfitting dan sangat cocok untuk masalah klasifikasi.
+- SVM (Support Vector Machine): Algoritma klasifikasi yang sangat kuat dalam memisahkan kelas dengan hyperplane terbaik. SVM sangat efektif dalam menangani data yang tidak linier dengan kernel tertentu.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+### Hyprparameter Tuning 
+Pada proyek ini, dilakukan optimasi hyperparameter menggunakan Optuna untuk model LightGBM. Proses tuning hyperparameter sangat penting untuk meningkatkan performa model dalam melakukan klasifikasi. Optuna memungkinkan optimasi hyperparameter secara otomatis melalui pendekatan Bayesian Optimization, yang mempercepat proses pencarian kombinasi terbaik dari parameter yang dicoba.
+
+**Hyperparameter yang Dioptimalkan**:
+Beberapa hyperparameter penting yang dioptimalkan adalah learning_rate, num_leaves, max_depth, n_estimators, min_child_samples, subsample, dan colsample_bytree.
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+Metrik yang digunakan untuk mengevaluasi model adalah Akurasi, Precision, Recall, dan F1-Score. Metrik ini dipilih karena sesuai dengan karakteristik masalah churn di mana Recall (kemampuan model mendeteksi churn) sangat penting untuk mengurangi potensi kehilangan pelanggan.
+- Accuracy: Mengukur persentase prediksi yang benar.
+- Precision: Mengukur seberapa baik model menghindari false positives.
+- Recall: Mengukur kemampuan model dalam mendeteksi churn (true positives).
+- F1-Score: Kombinasi antara precision dan recall, yang memberikan gambaran umum tentang kinerja model pada dataset yang tidak seimbang.
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+## Hasil Proyek
+Setelah melakukan tuning, model LightGBM memberikan hasil terbaik dengan metrik sebagai berikut:
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+Akurasi: 95%
+Precision: 91%
+Recall: 92%
+F1-Score: 91%
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan XGBoost.
 
 **---Ini adalah bagian akhir laporan---**
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
 
