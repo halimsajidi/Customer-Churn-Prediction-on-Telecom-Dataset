@@ -8,8 +8,9 @@ Dalam era digital, industri telekomunikasi menghadapi tantangan yang signifikan 
 - Churn mengurangi pendapatan perusahaan.
 - Mengidentifikasi pelanggan yang berpotensi churn dapat mengarahkan perusahaan untuk menawarkan layanan yang lebih sesuai, meningkatkan loyalitas pelanggan.
 
-  Riset menunjukkan bahwa 67% pelanggan yang churn menganggap layanan yang mereka terima tidak memenuhi harapan mereka, dan perusahaan yang tidak memiliki upaya pencegahan churn yang memadai dapat kehilangan hingga 25-30% basis pelanggannya per tahun.
-  Format Referensi: [Judul Referensi](https://scholar.google.com/) 
+Customer churn adalah masalah umum di berbagai bisnis di berbagai industri, termasuk keuangan, berita, asuransi, game mobile online, telekomunikasi, dan perjudian online. Churn management adalah konsep untuk mengidentifikasi pelanggan yang berniat untuk memindahkan kebiasaan mereka ke penyedia layanan yang bersaing. Pelanggan mungkin berhenti menggunakan produk atau layanan karena alasan yang berbeda - beberapa alasan yang mungkin tidak dapat dihindari, dan yang lainnya mungkin tidak. Oleh karena itu, memprediksi pelanggan mana yang cenderung berpindah dan faktor-faktor yang terkait dengan preferensi mereka sangat penting untuk melindungi pendapatan berulang, meningkatkan retensi pelanggan, dan memastikan pertumbuhan.
+
+Referensi: [Customer retention and churn prediction in the telecommunication industry: a case study on a Danish university] https://link.springer.com/article/10.1007/s42452-023-05389-6
 
 ## Business Understanding
 ### Problem Statements
@@ -44,8 +45,6 @@ Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapa
 - Payment Method Distribution
 
 ![image](https://github.com/user-attachments/assets/206bd770-0e69-4381-b056-c5038b8e28f4)
-
-
 
 - Churn Category by Gender
 
