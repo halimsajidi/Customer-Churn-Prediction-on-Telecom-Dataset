@@ -34,9 +34,10 @@ Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencaku
 
 ## Exploratory Data Analysis
 Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
-![Uploading image.png…]()
 
-- Distribusi customer berdasarkan gender: Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapat dilihat pada grafik di atas, kategori gender tidak berbeda jauh satu sama lain.
+- Distribusi customer berdasarkan gender:
+![image](https://github.com/user-attachments/assets/0453d495-0a76-4e02-9f03-7ff63c5daef0)
+Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapat dilihat pada grafik di atas, kategori gender tidak berbeda jauh satu sama lain.
 
 ## Data Preparation
 - Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani.
