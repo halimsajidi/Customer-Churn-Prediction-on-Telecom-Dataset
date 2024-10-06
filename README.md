@@ -26,13 +26,48 @@ Referensi: [Customer retention and churn prediction in the telecommunication ind
 - Melakukan hyperparameter tuning untuk meningkatkan performa model, mengoptimalkan metrik evaluasi seperti accuracy, recall, dan precision.
 
 ## Data Understanding
-Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencakup data pelanggan dari perusahaan telekomunikasi di California, dengan 7.043 entri dan 38 kolom. Dataset dapat di akses melalui link https://www.kaggle.com/datasets/shilongzhuang/telecom-customer-churn-by-maven-analytics/data 
+Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencakup data pelanggan dari perusahaan telekomunikasi di California, dengan 7.043 entri dan 38 kolom yang berisi Customer ID, 36 kolom independen yang digunakan untuk training model, dan  Customer Status sebagai kolom targetnya. Dataset yang digunakan masih terdapat _missing value_ sehigga perlu dilakukan pembersihan yang dilakukan pada saat _data preprocessing_. Dataset dapat di akses melalui link https://www.kaggle.com/datasets/shilongzhuang/telecom-customer-churn-by-maven-analytics/data 
 
 ### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-- accepts : merupakan jenis pembayaran yang diterima pada restoran tertentu.
-- cuisine : merupakan jenis masakan yang disajikan pada restoran.
-- dst
-
+- Customer ID: Identifikasi unik untuk setiap pelanggan dalam dataset (bertipe objek/karakter).
+- Gender: Jenis kelamin pelanggan (bertipe objek "Male" atau "Female").
+- Age: Usia pelanggan dalam satuan tahun (bertipe int64).
+- Married: Status pernikahan pelanggan, apakah sudah menikah atau belum (bertipe objek, "Yes" atau "No").
+- Number of Dependents: Jumlah tanggungan yang dimiliki pelanggan, seperti anak atau anggota keluarga lainnya (bertipe int64).
+- City: Nama kota tempat tinggal pelanggan (bertipe objek).
+- Zip Code: Kode pos dari tempat tinggal pelanggan (bertipe int64).
+- Latitude: Koordinat garis lintang tempat tinggal pelanggan (bertipe float64).
+- Longitude: Koordinat garis bujur tempat tinggal pelanggan (bertipe float64).
+- Number of Referrals: Jumlah referensi atau rekomendasi yang diberikan pelanggan (bertipe int64).
+- Tenure in Months: Lama pelanggan berlangganan dalam bulan (bertipe int64).
+- Offer: Penawaran khusus yang diterima pelanggan (bertipe objek, dengan banyak nilai kosong).
+- Phone Service: Indikasi apakah pelanggan memiliki layanan telepon atau tidak (bertipe objek, misalnya "Yes" atau "No").
+- Avg Monthly Long Distance Charges: Rata-rata biaya panggilan jarak jauh per bulan (bertipe float64, dengan beberapa nilai kosong).
+- Multiple Lines: Apakah pelanggan memiliki lebih dari satu jalur telepon (bertipe objek, misalnya "Yes", "No", atau "No phone service").
+- Internet Service: Indikasi apakah pelanggan memiliki layanan internet atau tidak (bertipe objek, misalnya "Yes" atau "No").
+- Internet Type: Jenis layanan internet yang digunakan pelanggan, seperti "DSL", "Fiber", atau "None" (bertipe objek, dengan beberapa nilai kosong).
+- Avg Monthly GB Download: Rata-rata penggunaan data internet dalam GB per bulan (bertipe float64, dengan beberapa nilai kosong).
+- Online Security: Apakah pelanggan memiliki layanan keamanan online atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Online Backup: Apakah pelanggan memiliki layanan cadangan data online atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Device Protection Plan: Apakah pelanggan memiliki paket perlindungan perangkat atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Premium Tech Support: Apakah pelanggan memiliki dukungan teknis premium atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Streaming TV: Apakah pelanggan berlangganan layanan streaming TV atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Streaming Movies: Apakah pelanggan berlangganan layanan streaming film atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Streaming Music: Apakah pelanggan berlangganan layanan streaming musik atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Unlimited Data: Apakah pelanggan memiliki paket data tanpa batas atau tidak (bertipe objek, dengan beberapa nilai kosong).
+- Contract: Jenis kontrak yang diambil oleh pelanggan, misalnya "Month-to-Month", "One Year", atau "Two Year" (bertipe objek).
+- Paperless Billing: Indikasi apakah pelanggan memilih tagihan tanpa kertas atau tidak (bertipe objek, misalnya "Yes" atau "No").
+- Payment Method: Metode pembayaran yang digunakan oleh pelanggan, seperti "Bank Transfer", "Credit Card", atau "Electronic Check" (bertipe objek).
+- Monthly Charge: Biaya bulanan yang dikenakan kepada pelanggan (bertipe float64).
+- Total Charges: Total biaya yang dikenakan kepada pelanggan hingga saat ini (bertipe float64).
+- Total Refunds: Jumlah total pengembalian dana yang diterima oleh pelanggan (bertipe float64).
+- Total Extra Data Charges: Jumlah biaya tambahan untuk penggunaan data yang melebihi batas (bertipe int64).
+- Total Long Distance Charges: Total biaya panggilan jarak jauh yang dikenakan kepada pelanggan (bertipe float64).
+- Total Revenue: Total pendapatan yang dihasilkan dari pelanggan ini (bertipe float64).
+- Customer Status (data target): Status pelanggan saat ini, apakah masih aktif, berhenti, atau churn (bertipe objek).
+- Churn Category: Alasan spesifik kenapa pelanggan berhenti menggunakan layanan (bertipe objek, dengan banyak nilai kosong).
+- Churn Reason: Alasan rinci pelanggan melakukan churn, seperti "Competitor Service", "Price", "Dissatisfaction" (bertipe objek, dengan banyak nilai kosong).
+  
 ## Exploratory Data Analysis
 Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
 
