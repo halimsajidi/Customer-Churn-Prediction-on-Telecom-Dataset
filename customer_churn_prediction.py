@@ -61,6 +61,8 @@ df_cat = df.select_dtypes(include="object")
 cat_col = df_cat.columns
 df_cat.head(5)
 
+df_cat.info()
+
 """**Select numerical data**"""
 
 df_num = df.select_dtypes(include=["int64", "float64"])
@@ -134,31 +136,67 @@ df_clean
 ### Univariate Analysis
 """
 
+df_clean.groupby(['Customer Status', 'Churn Category']).size().unstack().plot(kind='bar', stacked=True)
+plt.title('Churn Category by Customer Status')
+plt.xticks(rotation=0)
+plt.ylabel('Count')
+plt.show()
+
+"""Grafik ini menunjukkan bahwa sebagian besar pelanggan tetap setia menggunakan layanan, sementara pelanggan yang churn terutama disebabkan oleh kompetitor, diikuti oleh ketidakpuasan dan sikap pelanggan."""
+
 sns.countplot(data=df_clean, x='Gender')
 plt.title('Distribution of Gender')
 plt.show()
 
-df_clean['Payment Method'].value_counts().plot.pie(autopct='%1.1f%%')
-plt.title('Payment Method Distribution')
-plt.ylabel('')
+"""Grafik di atas menunjukkan bahwa tidak ada perbedaan signifikan antara pelanggan berdasarkan gender."""
+
+total_revenue_by_status = df_clean.groupby('Customer Status')['Total Revenue'].mean()
+
+# Create a bar plot
+plt.figure(figsize=(8, 6))
+total_revenue_by_status.plot(kind='bar')
+plt.title('Average Revenue by Customer Status')
+plt.xlabel('Customer Status')
+plt.ylabel('Average Revenue')
+plt.xticks(rotation=0)  # Make x-axis labels horizontal
 plt.show()
 
-df_clean.groupby(['Gender', 'Churn Category']).size().unstack().plot(kind='bar', stacked=True)
-plt.title('Churn Category by Gender')
-plt.ylabel('Count')
+"""Grafik ini menunjukkan bahwa rata-rata pendapatan pelanggan yang stayed jauh lebih tinggi dibandingkan dengan pelanggan yang churn."""
+
+total_Monthly_charge_by_status = df_clean.groupby('Customer Status')['Monthly Charge'].mean()
+
+# Create a bar plot
+plt.figure(figsize=(8, 6))
+total_Monthly_charge_by_status.plot(kind='bar')
+plt.title('Average Monthly charge by Customer Status')
+plt.xlabel('Customer Status')
+plt.ylabel('Average Monthly charge')
+plt.xticks(rotation=0)  # Make x-axis labels horizontal
 plt.show()
 
-contingency_table = pd.crosstab(df_clean['Internet Service'], df_clean['Churn Category'])
-sns.heatmap(contingency_table, annot=True, fmt='d')
-plt.title('Internet Service vs Churn Category')
+"""Grafik di atas menunjukkan bahwa pelanggan dengan biaya bulanan lebih tinggi cenderung mengalami churn."""
+
+sns.countplot(x='Payment Method', hue='Customer Status', data=df)
+plt.title('Payment Method vs Churn')
 plt.show()
 
-sns.countplot(data=df_clean, x='Internet Type')
-plt.title('Distribution of Internet Type')
-plt.xticks(rotation=0)
+"""Berdasarkan grafik di atas, terlihat bahwa metode pembayaran bank withdrawal, diikuti oleh credit card, merupakan metode pembayaran yang paling diminati. Namun, pada pembayaran credit card selisih pengguna yang stayed dengan churned terbilang besar, sehingga dapat dikatakan bahwa metode ini adalah yang paling efektif."""
+
+sns.countplot(x='Offer', hue='Customer Status', data=df)
+plt.title('Offer vs Churn')
 plt.show()
 
-"""### Multivariate
+"""Terlihat bahwa pelanggan yang menerima "Offer B" cenderung lebih banyak memilih untuk tetap bertahan (Stayed) dibandingkan dengan penawaran lainnya."""
+
+sns.kdeplot(df_clean[df_clean['Customer Status'] == 'Churned']['Tenure in Months'], label='Churned', fill=True, color='red')
+sns.kdeplot(df_clean[df_clean['Customer Status'] == 'Stayed']['Tenure in Months'], label='Stayed', fill=True, color='blue')
+plt.title('Tenure vs Churn')
+plt.legend()
+plt.show()
+
+"""Berdasarkan grafik di atas dapat diketahui bahwa pelanggan dengan masa berlangganan yang pendek lebih cenderung churn dibandingkan dengan pelanggan dengan masa berlangganan lebih lama.
+
+### Multivariate
 
 **Pairplot**
 """
@@ -200,6 +238,8 @@ plt.show()
 """## Data Preparation
 
 ### Encoding Data
+
+Pada tahap ini dilakukan encoding menggunakan label encoder, bertujuan agar data dapat diproses pada saat pengembangan model machine learning.
 """
 
 le = LabelEncoder()
@@ -209,7 +249,10 @@ for column in cat_col:
 
 df_clean
 
-"""### splitting data"""
+"""### splitting data
+
+Pembagian data dilakukan agar mendapatkan dataset train dan juga test dengan proporsi 80% dan 20%
+"""
 
 X = df_clean.drop(columns=['Customer ID','Customer Status'])
 y = df_clean['Customer Status']
@@ -397,4 +440,11 @@ study.optimize(objective, n_trials=100)  # Cobalah 50 percobaan (bisa disesuaika
 
 # Menampilkan hasil terbaik
 print("Best hyperparameters: ", study.best_params)
+
+"""Setelah dilakukan tuning, model mencapai akurasi sebesar 95.6%, yang hanya mengalami peningkatan kecil dibandingkan dengan baseline model. Dengan demikian, model masih perlu dikembangkan lebih lanjut, meskipun terdapat potensi terjadinya overfitting.
+
+**Best hyperparameters:**  {'learning_rate': 0.012701027197068579, 'num_leaves': 108, 'max_depth': 11, 'n_estimators': 249, 'min_child_samples': 77, 'subsample': 0.5498441301492917, 'colsample_bytree': 0.7279559900683892}
+"""
+
+
 
