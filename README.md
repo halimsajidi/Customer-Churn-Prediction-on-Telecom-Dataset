@@ -177,7 +177,24 @@ Setelah melakukan tuning, model LightGBM memberikan hasil terbaik dengan metrik 
 
 Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan model lainnya.
 
-## Konklusi
+## Kesimpulan
+Berdasarkan analisis data dan visualisasi yang telah dilakukan, berikut adalah kesimpulan untuk menjawab problem statements:
+
+1. **Bagaimana kita bisa mengidentifikasi pelanggan yang akan churn berdasarkan pola penggunaan layanan mereka?**
+   - Pelanggan yang lebih mungkin mengalami churn biasanya memiliki beberapa pola yang dapat diidentifikasi, seperti biaya bulanan yang lebih tinggi, durasi berlangganan yang lebih pendek, dan metode pembayaran tertentu (seperti **credit card**). Model machine learning (LGBM) dengan akurasi 95% dapat membantu memprediksi pelanggan yang akan churn berdasarkan fitur-fitur ini, seperti **biaya bulanan**, **metode pembayaran**, dan **tenure** (masa berlangganan).
+
+2. **Fitur-fitur apa saja yang paling memengaruhi keputusan pelanggan untuk churn?**
+   - Fitur-fitur utama yang memengaruhi churn meliputi:
+     - **Tenure** (masa berlangganan): Pelanggan dengan durasi berlangganan lebih pendek lebih cenderung churn.
+     - **Average Monthly Charges** (biaya bulanan rata-rata): Pelanggan dengan biaya bulanan yang lebih tinggi lebih cenderung churn.
+     - **Payment Method** (metode pembayaran): Metode pembayaran melalui **credit card** menunjukkan perbedaan signifikan antara pelanggan yang churn dan yang stayed.
+     - **Offer** (penawaran): Pelanggan yang menerima **Offer B** lebih cenderung tetap bertahan, sementara penawaran lain kurang efektif dalam mempertahankan pelanggan.
+     - **Customer Satisfaction** (kepuasan pelanggan) juga menjadi faktor penting, di mana sebagian besar pelanggan churn disebabkan oleh kompetitor atau ketidakpuasan dengan layanan.
+
+3. **Churn Category by Customer Status**
+   - Mayoritas pelanggan yang churn disebabkan oleh **kompetitor**, diikuti oleh ketidakpuasan pelanggan terhadap layanan. Hal ini menunjukkan bahwa **peningkatan kualitas layanan** dan **loyalty program** dapat menjadi langkah strategis untuk mengurangi churn.
+
+Melalui implementasi **model machine learning LGBM**, prediksi churn dapat dilakukan dengan tingkat akurasi yang tinggi (95%), sehingga memungkinkan perusahaan untuk **mengantisipasi churn lebih dini** dan melakukan **strategi mitigasi** yang tepat.
 
 
 ## Referensi
