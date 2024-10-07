@@ -161,10 +161,15 @@ Recall=  TP/(TP+FN)
 
 F1-score=2×(Precision×Recall)/(Precision+Recall)
 
+
 Keterangan:
+
 TP	=	Jumlah Signal yang diprediksi benar sebagai signal.
+
 TN	=	Jumlah background yang diprediksi benar sebagai background.
+
 FP	=	Jumlah background yang salah diprediksi sebagai signal.
+
 FN	=	Jumlah signal yang salah diprediksi sebagai background.
 
 
