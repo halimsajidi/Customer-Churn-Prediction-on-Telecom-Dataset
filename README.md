@@ -81,14 +81,6 @@ Grafik ini menunjukkan bahwa sebagian besar pelanggan tetap setia menggunakan la
 
 Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapat dilihat pada grafik di atas, kategori gender tidak berbeda jauh satu sama lain.
 
-- Payment Method Distribution
-
-![image](https://github.com/user-attachments/assets/206bd770-0e69-4381-b056-c5038b8e28f4)
-
-- Churn Category by Gender
-
-![image](https://github.com/user-attachments/assets/6a16e62d-252a-48ef-9aa4-c107784ecf78)
-
 - Average Revenue by Customer Status
 
 ![image](https://github.com/user-attachments/assets/715f4e98-a5ee-4730-8c8e-93f536a898d6)
@@ -120,7 +112,7 @@ Terlihat bahwa pelanggan yang menerima "Offer B" cenderung lebih banyak memilih 
 Berdasarkan grafik di atas dapat diketahui bahwa pelanggan dengan masa berlangganan yang pendek lebih cenderung churn dibandingkan dengan pelanggan dengan masa berlangganan lebih lama.
 
 ## Data Preparation
-- Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani.
+- Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani. Missing value ditangani dengan cara mengganti nilai nan dengan rata-rata untuk data numerik dan modus untuk data kategorik.
 - Encoding: Kolom kategorikal seperti "Gender" dan "Contract" diubah menjadi bentuk numerik menggunakan LabelEncoder.
 - Splitting Data: Membagi data ke dalam dua bagian utama Training Data dan Test Data dengan proporsi 80% dan 20% yang dilakukan dengan menggunakan fungsi train_test_split dari library Scikit-Learn.
 
