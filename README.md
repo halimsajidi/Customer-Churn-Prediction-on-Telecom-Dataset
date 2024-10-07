@@ -8,9 +8,7 @@ Dalam era digital, industri telekomunikasi menghadapi tantangan yang signifikan 
 - Churn mengurangi pendapatan perusahaan.
 - Mengidentifikasi pelanggan yang berpotensi churn dapat mengarahkan perusahaan untuk menawarkan layanan yang lebih sesuai, meningkatkan loyalitas pelanggan.
 
-Customer churn adalah masalah umum di berbagai bisnis di berbagai industri, termasuk keuangan, berita, asuransi, game mobile online, telekomunikasi, dan perjudian online. Churn management adalah konsep untuk mengidentifikasi pelanggan yang berniat untuk memindahkan kebiasaan mereka ke penyedia layanan yang bersaing. Pelanggan mungkin berhenti menggunakan produk atau layanan karena alasan yang berbeda - beberapa alasan yang mungkin tidak dapat dihindari, dan yang lainnya mungkin tidak. Oleh karena itu, memprediksi pelanggan mana yang cenderung berpindah dan faktor-faktor yang terkait dengan preferensi mereka sangat penting untuk melindungi pendapatan berulang, meningkatkan retensi pelanggan, dan memastikan pertumbuhan.
-
-Referensi: [Customer retention and churn prediction in the telecommunication industry: a case study on a Danish university] https://link.springer.com/article/10.1007/s42452-023-05389-6
+Customer churn adalah masalah umum di berbagai bisnis di berbagai industri, termasuk keuangan, berita, asuransi, game mobile online, telekomunikasi, dan perjudian online. Churn management adalah konsep untuk mengidentifikasi pelanggan yang berniat untuk memindahkan kebiasaan mereka ke penyedia layanan yang bersaing. Pelanggan mungkin berhenti menggunakan produk atau layanan karena alasan yang berbeda - beberapa alasan yang mungkin tidak dapat dihindari, dan yang lainnya mungkin tidak (Saleh dan Saha 2023). Oleh karena itu, memprediksi pelanggan mana yang cenderung berpindah dan faktor-faktor yang terkait dengan preferensi mereka sangat penting untuk melindungi pendapatan berulang, meningkatkan retensi pelanggan, dan memastikan pertumbuhan.
 
 ## Business Understanding
 ### Problem Statements
@@ -102,17 +100,33 @@ Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapa
 Alasan langkah-langkah ini dilakukan adalah untuk memastikan data yang bersih dan siap digunakan dalam pemodelan, sehingga dapat menghindari bias dan meningkatkan akurasi model.
 
 ## Modeling
-Pada tahap ini, empat algoritma utama yang digunakan adalah LightGBM (LGBM), Random Forest, XGBoost, dan SVM (Support Vector Machine). Berikut penjelasan tiap algoritma:
-- LightGBM (LGBM): Algoritma yang efisien dan cepat dalam menangani dataset besar, dengan kemampuan menangani fitur numerik dan kategorikal serta mengurangi waktu komputasi. Cocok untuk data yang memiliki ketidakseimbangan kelas.
-- Random Forest: Algoritma berbasis ensemble yang terdiri dari banyak decision trees, cocok untuk data yang bervariasi dan dapat menangani data dengan banyak fitur. Salah satu kelebihannya adalah feature importance, yang membantu mengidentifikasi fitur yang paling berpengaruh terhadap churn.
-- XGBoost: Algoritma boosting berbasis decision tree yang terkenal dengan kemampuannya dalam meningkatkan akurasi prediksi. XGBoost memiliki kemampuan untuk mengatasi overfitting dan sangat cocok untuk masalah klasifikasi.
-- SVM (Support Vector Machine): Algoritma klasifikasi yang sangat kuat dalam memisahkan kelas dengan hyperplane terbaik. SVM sangat efektif dalam menangani data yang tidak linier dengan kernel tertentu.
+Algoritma ML dapat digunakan untuk klasifikasi. Beberapa algoritma yang dapat diterapkan yaitu decision trees, random forest, adaptive boosting, dan neural networks (Waiwattana et al. 2022). Dengan demikian digunakan empat algoritma utama yaitu LightGBM (LGBM), Random Forest, XGBoost, dan SVM (Support Vector Machine). Berikut penjelasan tiap algoritma:
+- LightGBM (LGBM): LightGBM merupakan algoritma boosting yang bekerja dengan membangun model secara bertahap. Setiap model baru berusaha mengoreksi kesalahan dari model sebelumnya dengan fokus pada data yang sulit diprediksi. Algoritma ini efisien dan cepat dalam menangani dataset besar, dengan kemampuan menangani fitur numerik dan kategorikal serta mengurangi waktu komputasi. Cocok untuk data yang memiliki ketidakseimbangan kelas.
+- Random Forest: Random Forest terdiri dari banyak decision trees yang dibangun menggunakan teknik bootstrap sampling dari dataset. Setiap tree menghasilkan prediksi, dan hasil akhir diperoleh melalui voting mayoritas untuk klasifikasi. Algoritma berbasis ensemble yang terdiri dari banyak decision trees, cocok untuk data yang bervariasi dan dapat menangani data dengan banyak fitur. Salah satu kelebihannya adalah feature importance, yang membantu mengidentifikasi fitur yang paling berpengaruh terhadap churn.
+- XGBoost: XGBoost membangun model secara bertahap, dengan setiap model baru berfokus pada kesalahan yang dibuat oleh model sebelumnya. Ini membantu dalam meningkatkan akurasi. Algoritma boosting berbasis decision tree yang terkenal dengan kemampuannya dalam meningkatkan akurasi prediksi. XGBoost memiliki kemampuan untuk mengatasi overfitting dan sangat cocok untuk masalah klasifikasi.
+- SVM (Support Vector Machine): SVM mencari hyperplane yang memisahkan dua kelas dengan margin maksimum. Model berusaha meminimalkan kesalahan klasifikasi dengan memaksimalkan margin antara kelas. Algoritma klasifikasi yang sangat kuat dalam memisahkan kelas dengan hyperplane terbaik. SVM sangat efektif dalam menangani data yang tidak linier dengan kernel tertentu.
+
+Setiap model hanya diberikan parameter random_state yang didapatkan dari Scikit-learn. Random state digunakan untuk mengontrol pengacakan yang diterapkan pada data sebelum melakukan pemisahan. Tujuan utama pada tahap ini adalah membandingkan basemodel yang terbaik, setelahnya akan dilakukan tuning untuk meningkatkan hasil prediksi.
 
 ### Hyprparameter Tuning 
 Pada proyek ini, dilakukan optimasi hyperparameter menggunakan Optuna untuk model LightGBM. Proses tuning hyperparameter sangat penting untuk meningkatkan performa model dalam melakukan klasifikasi. Optuna memungkinkan optimasi hyperparameter secara otomatis melalui pendekatan Bayesian Optimization, yang mempercepat proses pencarian kombinasi terbaik dari parameter yang dicoba.
 
 **Hyperparameter yang Dioptimalkan**:
-Beberapa hyperparameter penting yang dioptimalkan adalah learning_rate, num_leaves, max_depth, n_estimators, min_child_samples, subsample, dan colsample_bytree.
+Hyperparameter penting yang dioptimalkan adalah 
+```bash
+        'objective': 'multiclass',
+        'metric': 'multi_logloss',
+        'boosting_type': 'gbdt',
+        'num_class': len(np.unique(y)),
+        'learning_rate': trial.suggest_float('learning_rate', 1e-4, 1e-1, log=True),
+        'num_leaves': trial.suggest_int('num_leaves', 20, 150),
+        'max_depth': trial.suggest_int('max_depth', 3, 12),
+        'n_estimators': trial.suggest_int('n_estimators', 100, 1000),
+        'min_child_samples': trial.suggest_int('min_child_samples', 20, 100),
+        'subsample': trial.suggest_float('subsample', 0.5, 1.0),
+        'colsample_bytree': trial.suggest_float('colsample_bytree', 0.5, 1.0)
+```
+Berdasarkan parameter di atas terdapat beberapa parameter yang perlu di perhatikan seperti parameter objective yang menggunakan multiclass karena menyesuaikan dengan data target yang memiliki tiga klasifikasi dan num_class yang menyesuaikan data target. Beberapa paramter lainnya dipertimbangkan berdasarkan device yang digunakan agar tidak terlalu kompleks dan juga tidak terlalu sederhana.
 
 ## Evaluation
 Metrik yang digunakan untuk mengevaluasi model adalah Akurasi, Precision, Recall, dan F1-Score. Metrik ini dipilih karena sesuai dengan karakteristik masalah churn di mana Recall (kemampuan model mendeteksi churn) sangat penting untuk mengurangi potensi kehilangan pelanggan.
@@ -121,15 +135,33 @@ Metrik yang digunakan untuk mengevaluasi model adalah Akurasi, Precision, Recall
 - Recall: Mengukur kemampuan model dalam mendeteksi churn (true positives).
 - F1-Score: Kombinasi antara precision dan recall, yang memberikan gambaran umum tentang kinerja model pada dataset yang tidak seimbang.
 
+Accuracy=  (TP+TN)/(TP+TN+FP+FN)
+Precision=  TP/(TP+FP)
+Recall=  TP/(TP+FN)
+F1-score=2×(Precision×Recall)/(Precision+Recall)
+
+Keterangan:
+TP	=	Jumlah Signal yang diprediksi benar sebagai signal.
+TN	=	Jumlah background yang diprediksi benar sebagai background.
+FP	=	Jumlah background yang salah diprediksi sebagai signal.
+FN	=	Jumlah signal yang salah diprediksi sebagai background.
+
+
 ## Hasil Proyek
 Setelah melakukan tuning, model LightGBM memberikan hasil terbaik dengan metrik sebagai berikut:
-
 - Akurasi: 95%
 - Precision: 91%
 - Recall: 92%
 - F1-Score: 91%
 
 Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan XGBoost.
+
+## Konklusi
+
+## Referensi
+Saleh S, Saha S. 2023. Customer retention and churn prediction in the telecommunication industry: a case study on a Danish university. SN Appl. Sci. 5(7):undefined-undefined.doi:10.1007/s42452-023-05389-6.
+
+Waiwattana J, Asawatangtrakuldee C, Saksirimontri P, Wachirapusitanand V, Pitakkultorn N. 2022. Application of Machine Learning Algorithms for Searching BSM Higgs Bosons Decaying to a Pair of Bottom Quarks. Trends Sci. 19(19).doi:10.48048/tis.2022.5373.
 
 **---Ini adalah bagian akhir laporan---**
 
