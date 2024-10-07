@@ -69,6 +69,12 @@ Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencaku
 ## Exploratory Data Analysis
 Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
 
+- Churn Category by Customer Status
+
+![image](https://github.com/user-attachments/assets/d13d6339-0ef4-4b74-96dc-dcfb4fb1ab64)
+
+Grafik ini menunjukkan bahwa sebagian besar pelanggan tetap setia menggunakan layanan, sementara pelanggan yang churn terutama disebabkan oleh kompetitor, diikuti oleh ketidakpuasan dan sikap pelanggan.
+
 - Distribution of Gender Type
 
 ![image](https://github.com/user-attachments/assets/0453d495-0a76-4e02-9f03-7ff63c5daef0)
@@ -83,14 +89,35 @@ Berdasarkan visualisasi dapat diamati jumlah kategori gender yang tersedia. Dapa
 
 ![image](https://github.com/user-attachments/assets/6a16e62d-252a-48ef-9aa4-c107784ecf78)
 
-- Internet Service vs Churn Category
+- Average Revenue by Customer Status
 
-![image](https://github.com/user-attachments/assets/d1067fa2-9816-4113-9f91-133fd81ff6c5)
+![image](https://github.com/user-attachments/assets/715f4e98-a5ee-4730-8c8e-93f536a898d6)
 
-- Distribution of Internet Type
+Grafik ini menunjukkan bahwa rata-rata pendapatan pelanggan yang stayed jauh lebih tinggi dibandingkan dengan pelanggan yang churn.
 
-![image](https://github.com/user-attachments/assets/ec40568b-9679-4ab1-9976-0225ed9a6938)
+- Average Monthly charge by Customer Status
 
+![image](https://github.com/user-attachments/assets/c68f4e58-d3ab-4e0e-a13b-9370a5ff1ca4)
+
+Grafik di atas menunjukkan bahwa pelanggan dengan biaya bulanan lebih tinggi cenderung mengalami churn. 
+
+- Payment Method vs Churn
+
+![image](https://github.com/user-attachments/assets/8ffc0988-42f9-4694-bcfb-55636a30982d)
+
+Berdasarkan grafik di atas, terlihat bahwa metode pembayaran bank withdrawal, diikuti oleh credit card, merupakan metode pembayaran yang paling diminati. Namun, pada pembayaran credit card selisih pengguna yang stayed dengan churned terbilang besar, sehingga dapat dikatakan bahwa metode ini adalah yang paling efektif.
+
+- Offer vs Churn
+
+![image](https://github.com/user-attachments/assets/4a0edc89-7936-4852-adfd-9e9638ba75d1)
+
+Terlihat bahwa pelanggan yang menerima "Offer B" cenderung lebih banyak memilih untuk tetap bertahan (Stayed) dibandingkan dengan penawaran lainnya.
+
+- Tenure vs Churn
+
+![image](https://github.com/user-attachments/assets/1c0b8a0c-8e85-456d-80d7-a0f41a3d5f24)
+
+Berdasarkan grafik di atas dapat diketahui bahwa pelanggan dengan masa berlangganan yang pendek lebih cenderung churn dibandingkan dengan pelanggan dengan masa berlangganan lebih lama.
 
 ## Data Preparation
 - Handling Missing Values: Beberapa kolom seperti "Churn Reason" dan "Offer" memiliki missing values yang harus ditangani.
@@ -112,7 +139,6 @@ Setiap model hanya diberikan parameter random_state yang didapatkan dari Scikit-
 Pada proyek ini, dilakukan optimasi hyperparameter menggunakan Optuna untuk model LightGBM. Proses tuning hyperparameter sangat penting untuk meningkatkan performa model dalam melakukan klasifikasi. Optuna memungkinkan optimasi hyperparameter secara otomatis melalui pendekatan Bayesian Optimization, yang mempercepat proses pencarian kombinasi terbaik dari parameter yang dicoba.
 
 **Hyperparameter yang Dioptimalkan**:
-Hyperparameter penting yang dioptimalkan adalah 
 ```bash
         'objective': 'multiclass',
         'metric': 'multi_logloss',
@@ -136,8 +162,11 @@ Metrik yang digunakan untuk mengevaluasi model adalah Akurasi, Precision, Recall
 - F1-Score: Kombinasi antara precision dan recall, yang memberikan gambaran umum tentang kinerja model pada dataset yang tidak seimbang.
 
 Accuracy=  (TP+TN)/(TP+TN+FP+FN)
+
 Precision=  TP/(TP+FP)
+
 Recall=  TP/(TP+FN)
+
 F1-score=2×(Precision×Recall)/(Precision+Recall)
 
 Keterangan:
@@ -154,9 +183,10 @@ Setelah melakukan tuning, model LightGBM memberikan hasil terbaik dengan metrik 
 - Recall: 92%
 - F1-Score: 91%
 
-Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan XGBoost.
+Model LightGBM dipilih sebagai model final karena memiliki performa terbaik dalam menyeimbangkan recall dan precision, yang sangat penting dalam kasus prediksi churn. Model ini juga lebih efisien dalam komputasi dibandingkan model lainnya.
 
 ## Konklusi
+
 
 ## Referensi
 Saleh S, Saha S. 2023. Customer retention and churn prediction in the telecommunication industry: a case study on a Danish university. SN Appl. Sci. 5(7):undefined-undefined.doi:10.1007/s42452-023-05389-6.
