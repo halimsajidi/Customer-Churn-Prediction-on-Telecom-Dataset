@@ -68,9 +68,6 @@ Dataset yang digunakan dalam proyek ini berasal dari Kaggle. Dataset ini mencaku
   
 ## Exploratory Data Analysis
 
-![image](https://github.com/user-attachments/assets/e0283f69-a86e-46e2-a323-71f3ac6e7cf7)
-
-
 Untuk memahami pola dan karakteristik data, beberapa visualisasi data digunakan, antara lain:
 
 - Churn Category by Customer Status
